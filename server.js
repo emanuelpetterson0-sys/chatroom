@@ -19,13 +19,13 @@ app.use((req, res, next) => {
 
 // 1. MySQL Pool Setup
 const pool = mysql.createPool({
-    host: 'localhost',
+    host: 'mysql.railway.internal',
     user: 'root',
-    password: '',
-    database: 'chatroom',
+    password: 'BHLbRunXGxshCGKsbAwIKJXrQBLTPopS',
+    database: 'railway',
     waitForConnections: true,
     connectionLimit: 10,
-}).promise(); // Using .promise() makes code cleaner with async/await
+}).promise();// Using .promise() makes code cleaner with async/await
 
 // 2. Initialize Database & Start Server
 async function initDB() {
