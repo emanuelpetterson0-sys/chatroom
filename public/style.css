@@ -100,7 +100,8 @@ body {
 #messages li {
   display: flex;
   flex-direction: column;
-  max-width: 72%;
+  align-items: flex-start;
+  max-width: 80%;
   animation: fadeUp 0.2s ease;
 }
 
@@ -109,44 +110,49 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-#messages li .username {
+/* Timestamp: the raw text node before .userTextContainer */
+#messages li > *:not(.userTextContainer),
+#messages li {
   font-size: 11px;
-  font-weight: 600;
-  color: var(--username-color);
-  margin-bottom: 4px;
-  padding-left: 4px;
-  letter-spacing: 0.03em;
+  color: var(--text-muted);
 }
 
-#messages li .bubble {
+#messages li > .userTextContainer {
+  font-size: 14.5px;
+  color: var(--text-primary);
+}
+
+/* Timestamp sits above the bubble */
+#messages li::before {
+  /* timestamp is injected as a text node — we style the li itself small/muted
+     and override inside userTextContainer */
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* The bubble wrapper */
+.userTextContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
   background: var(--bubble-other);
   color: var(--bubble-other-text);
   padding: 10px 14px;
   border-radius: var(--radius-md);
   border-bottom-left-radius: var(--radius-sm);
-  font-size: 14.5px;
+  border: 1px solid var(--border);
   line-height: 1.55;
   word-break: break-word;
-  border: 1px solid var(--border);
+  margin-top: 3px;
+  font-size: 14.5px;
 }
 
-#messages li.self {
-  align-self: flex-end;
-  align-items: flex-end;
-}
-
-#messages li.self .username {
-  color: var(--accent-hover);
-  text-align: right;
-  padding-right: 4px;
-}
-
-#messages li.self .bubble {
-  background: var(--bubble-self);
-  color: var(--bubble-self-text);
-  border-radius: var(--radius-md);
-  border-bottom-right-radius: var(--radius-sm);
-  border-color: rgba(99, 102, 241, 0.25);
+.usernames {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--username-color);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .input-row {
